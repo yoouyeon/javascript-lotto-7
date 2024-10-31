@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
+import getLogSpy from '../src/utils/test/getLogSpy.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -17,12 +18,6 @@ const mockRandoms = (numbers) => {
     (acc, number) => acc.mockReturnValueOnce(number),
     MissionUtils.Random.pickUniqueNumbersInRange
   );
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
 };
 
 const runException = async (input) => {
