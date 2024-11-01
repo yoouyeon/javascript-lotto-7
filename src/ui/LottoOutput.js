@@ -1,5 +1,7 @@
 import Output from './Output.js';
 
+/** @typedef {import ('../domains/Lotto.js').default} Lotto */
+
 class LottoOutput extends Output {
   static #STATISTICS_HEADER_MESSAGE = '당첨 통계\n---';
 
@@ -14,9 +16,15 @@ class LottoOutput extends Output {
   static #YIELD_FORMAT = (yieldRate) =>
     `총 수익률은 ${yieldRate.toFixed(1)}%입니다.`;
 
+  /**
+   *
+   * @param {Array<Lotto>} lottos - 구매한 로또 배열
+   */
   static printPurchasedLotto(lottos) {
     super.print(this.#LOTTO_AMOUNT_MESSAGE(lottos.length));
-    lottos.forEach((lotto) => super.print(this.#LOTTO_NUMBERS_FORMAT(lotto)));
+    lottos.forEach((lotto) =>
+      super.print(this.#LOTTO_NUMBERS_FORMAT(lotto.numbers))
+    );
   }
 
   static printResult(statistics, yieldRate) {
