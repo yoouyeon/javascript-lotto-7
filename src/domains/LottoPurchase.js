@@ -1,4 +1,4 @@
-import Lotto from '../Lotto.js';
+import Lotto from './Lotto.js';
 import LottoGenerator from './LottoGenerator.js';
 
 const LottoPurchase = {

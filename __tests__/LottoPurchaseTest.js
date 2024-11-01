@@ -1,5 +1,5 @@
 import LottoPurchase from '../src/domains/LottoPurchase.js';
-import Lotto from '../src/Lotto.js';
+import Lotto from '../src/domains/Lotto.js';
 
 describe('로또 구매 테스트', () => {
   test.each([
