@@ -1,69 +1,73 @@
-// TODO : 객체 관리 방법에 대한 고민이 필요함
+// @ts-check
+import LOTTERY_PRIZE_TABLE from '../constants/LotteryPrizeTable.js';
 
-export const LOTTO_WINNER_RANK = {
-  FIRST: {
-    matchCount: 6,
-    description: '6개 일치',
-    winningMoney: 2000000000,
-    bonusRequired: false,
-  },
-  SECOND: {
-    matchCount: 5,
-    description: '5개 일치, 보너스 볼 일치',
-    winningMoney: 30000000,
-    bonusRequired: true,
-  },
-  THIRD: {
-    matchCount: 5,
-    description: '5개 일치',
-    winningMoney: 1500000,
-    bonusRequired: false,
-  },
-  FOURTH: {
-    matchCount: 4,
-    description: '4개 일치',
-    winningMoney: 50000,
-    bonusRequired: false,
-  },
-  FIFTH: {
-    matchCount: 3,
-    description: '3개 일치',
-    winningMoney: 5000,
-    bonusRequired: false,
-  },
-};
+/** @typedef {import('./Lotto.js').default} Lotto */
 
-export class LottoResult {
+class LottoResult {
   #winningNumbers = [];
 
   #bonusNumber = 0;
 
+  /**
+   * @constructor
+   * @param {Array<number>} winningNumbers - 당첨 번호
+   * @param {number} bonusNumber - 보너스 번호
+   */
   constructor(winningNumbers, bonusNumber) {
     this.#winningNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
   }
 
+  /**
+   * @public
+   * @param {Array<Lotto>} lottos
+   * @returns {Array<(import('../types.js').LottoResultType)>} - 로또 결과 배열
+   */
   getTotalResult(lottos) {
-    return lottos.map((lotto) => this.getLottoResult(lotto));
+    return lottos.map((lotto) => this.getResult(lotto));
   }
 
-  getLottoResult = (lotto) => {
+  /**
+   * @public
+   * @param {Lotto} lotto
+   * @returns {import('../types.js').LottoResultType} - 로또 결과 (당첨 또는 미당첨)
+   */
+  getResult = (lotto) => {
     const matchCount = this.#getMatchCount(lotto);
     const isBonusMatch = this.#isBonusMatch(lotto);
-    return LottoResult.#getWinnerRank(matchCount, isBonusMatch);
+    return LottoResult.#getRank(matchCount, isBonusMatch);
   };
 
+  /**
+   * @param {Lotto} lotto
+   * @returns {number} - 당첨 번호와 일치하는 숫자의 개수
+   */
   #getMatchCount = (lotto) =>
     lotto.numbers.filter((number) => this.#winningNumbers.includes(number))
       .length;
 
+  /**
+   * @param {Lotto} lotto
+   * @returns {boolean} - 보너스 번호와 일치하는 숫자가 있는지 여부
+   */
   #isBonusMatch = (lotto) => lotto.numbers.includes(this.#bonusNumber);
 
-  static #getWinnerRank = (matchCount, isBonusMatch) => {
-    const winnerRank = Object.values(LOTTO_WINNER_RANK).find(
-      (rank) =>
-        rank.matchCount === matchCount && rank.bonusRequired === isBonusMatch
+  /**
+   * @param {number} matchCount - 당첨 번호와 일치하는 숫자의 개수
+   * @param {boolean} isBonusMatch - 보너스 번호와 일치하는지 여부
+   * @returns {import('../types.js').LottoResultType} - 로또 결과 (당첨 또는 미당첨)
+   */
+  static #getRank = (matchCount, isBonusMatch) => {
+    const lottoRank = /** @type {import('../types.js').LottoResultType} */ (
+      Object.keys(LOTTERY_PRIZE_TABLE).find(
+        (rank) =>
+          LOTTERY_PRIZE_TABLE[rank].matchCount === matchCount &&
+          LOTTERY_PRIZE_TABLE[rank].bonusRequired === isBonusMatch
+      ) || null
     );
-    return winnerRank || null;
+
+    return lottoRank;
   };
 }
+
+export default LottoResult;
