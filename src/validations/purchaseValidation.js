@@ -1,4 +1,4 @@
-import checkRuleSet from './checkRuleSet.js';
+import checkRuleSet from '../utils/checkRuleSet.js';
 
 const purchaseValidation = Object.freeze({
   RULE_SET: Object.freeze({

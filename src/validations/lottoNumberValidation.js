@@ -1,15 +1,19 @@
-import checkRuleSet from './checkRuleSet.js';
+import checkRuleSet from '../utils/checkRuleSet.js';
+import LOTTO_NUMBER_RULE from '../constants/LottoNumberRule.js';
 
 const lottoNumberValidation = Object.freeze({
   RULE_SET: Object.freeze({
     notValidCount: Object.freeze({
-      isValid: (lottoNumber) => lottoNumber.length === 6,
-      errorMessage: '로또 번호는 6개여야 합니다.',
+      isValid: (lottoNumber) => lottoNumber.length === LOTTO_NUMBER_RULE.LENGTH,
+      errorMessage: `로또 번호는 ${LOTTO_NUMBER_RULE.LENGTH}개여야 합니다.`,
     }),
     notInRange: Object.freeze({
       isValid: (lottoNumber) =>
-        lottoNumber.every((number) => number >= 1 && number <= 45),
-      errorMessage: '로또 번호는 1부터 45 사이여야 합니다.',
+        lottoNumber.every(
+          (number) =>
+            number >= LOTTO_NUMBER_RULE.MIN && number <= LOTTO_NUMBER_RULE.MAX
+        ),
+      errorMessage: `로또 번호는 ${LOTTO_NUMBER_RULE.MIN}부터 ${LOTTO_NUMBER_RULE.MAX} 사이여야 합니다.`,
     }),
     notUnique: Object.freeze({
       isValid: (lottoNumber) =>

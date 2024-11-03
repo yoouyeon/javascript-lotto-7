@@ -1,4 +1,5 @@
-import checkRuleSet from './checkRuleSet.js';
+import checkRuleSet from '../utils/checkRuleSet.js';
+import LOTTO_NUMBER_RULE from '../constants/LottoNumberRule.js';
 
 const bonusNumberValidation = Object.freeze({
   RULE_SET: Object.freeze({
@@ -12,8 +13,9 @@ const bonusNumberValidation = Object.freeze({
     }),
     notInRange: Object.freeze({
       isValid: ({ bonusNumber }) =>
-        Number(bonusNumber) >= 1 && Number(bonusNumber) <= 45,
-      errorMessage: '1부터 45 사이의 숫자를 입력해주세요.',
+        Number(bonusNumber) >= LOTTO_NUMBER_RULE.MIN &&
+        Number(bonusNumber) <= LOTTO_NUMBER_RULE.MAX,
+      errorMessage: `${LOTTO_NUMBER_RULE.MIN}부터 ${LOTTO_NUMBER_RULE.MAX} 사이의 숫자를 입력해주세요.`,
     }),
     notUnique: Object.freeze({
       isValid: ({ bonusNumber, winningNumbers }) =>

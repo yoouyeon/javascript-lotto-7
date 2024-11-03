@@ -1,4 +1,4 @@
-import CustomError from './CustomError.js';
+import CustomError from '../validations/CustomError.js';
 
 const checkRuleSet = (target, ruleSet) => {
   Object.values(ruleSet).forEach((rule) => {

@@ -1,14 +1,15 @@
-import checkRuleSet from './checkRuleSet.js';
+import checkRuleSet from '../utils/checkRuleSet.js';
+import LOTTO_NUMBER_RULE from '../constants/LottoNumberRule.js';
 
 const winningNumbersValidation = Object.freeze({
   RULE_SET: Object.freeze({
     notValidCount: Object.freeze({
-      isValid: (winningNumbers) => winningNumbers.length === 6,
-      errorMessage: '6개의 숫자를 입력해주세요.',
+      isValid: (winningNumbers) =>
+        winningNumbers.length === LOTTO_NUMBER_RULE.LENGTH,
+      errorMessage: `${LOTTO_NUMBER_RULE.LENGTH}개의 숫자를 입력해주세요.`,
     }),
     notNumber: Object.freeze({
       isValid: (winningNumbers) =>
-        winningNumbers.length === 6 &&
         winningNumbers.every((number) => !Number.isNaN(Number(number))),
       errorMessage: '숫자를 입력해주세요.',
     }),
@@ -24,8 +25,11 @@ const winningNumbersValidation = Object.freeze({
     }),
     notInRange: Object.freeze({
       isValid: (winningNumbers) =>
-        winningNumbers.every((number) => number >= 1 && number <= 45),
-      errorMessage: '1부터 45 사이의 숫자를 입력해주세요.',
+        winningNumbers.every(
+          (number) =>
+            number >= LOTTO_NUMBER_RULE.MIN && number <= LOTTO_NUMBER_RULE.MAX
+        ),
+      errorMessage: `${LOTTO_NUMBER_RULE.MIN}부터 ${LOTTO_NUMBER_RULE.MAX} 사이의 숫자를 입력해주세요.`,
     }),
   }),
 
