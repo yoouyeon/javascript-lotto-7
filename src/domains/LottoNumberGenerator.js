@@ -1,17 +1,12 @@
 import { Random } from '@woowacourse/mission-utils';
+import LOTTO_NUMBER_RULE from '../constants/LottoNumberRule.js';
 
-class LottoGenerator {
-  static #LOTTO_NUMBERS = Object.freeze({
-    MIN: 1,
-    MAX: 45,
-    COUNT: 6,
-  });
-
+class LottoNumberGenerator {
   static #pickNumbers() {
     const uniqueNumbers = Random.pickUniqueNumbersInRange(
-      this.#LOTTO_NUMBERS.MIN,
-      this.#LOTTO_NUMBERS.MAX,
-      this.#LOTTO_NUMBERS.COUNT
+      LOTTO_NUMBER_RULE.MIN,
+      LOTTO_NUMBER_RULE.MAX,
+      LOTTO_NUMBER_RULE.LENGTH
     );
     return uniqueNumbers.sort((a, b) => a - b);
   }
@@ -21,4 +16,4 @@ class LottoGenerator {
   }
 }
 
-export default LottoGenerator;
+export default LottoNumberGenerator;
