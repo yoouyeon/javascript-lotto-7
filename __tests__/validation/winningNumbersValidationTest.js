@@ -41,8 +41,10 @@ describe('당첨 번호 유효성 검사', () => {
   );
 
   test('유효한 당첨번호를 입력하면 CustomError를 반환하지 않는다.', () => {
+    const VALID_WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
+
     expect(() =>
-      winningNumbersValidation.validate([1, 2, 3, 4, 5, 6])
+      winningNumbersValidation.validate(VALID_WINNING_NUMBERS)
     ).not.toThrow(CustomError);
   });
 });

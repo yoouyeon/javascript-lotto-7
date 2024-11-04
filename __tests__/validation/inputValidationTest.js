@@ -14,6 +14,10 @@ describe('입력 유효성 검사 테스트', () => {
   );
 
   test('유효한 입력에는 CustomError를 반환하지 않는다.', () => {
-    expect(() => inputValidation.validate('1')).not.toThrow(CustomError);
+    const VALID_INPUT = '1';
+
+    expect(() => inputValidation.validate(VALID_INPUT)).not.toThrow(
+      CustomError
+    );
   });
 });

@@ -2,7 +2,7 @@ import Lotto from '../../src/domains/Lotto.js';
 import LottoOutput from '../../src/ui/LottoOutput.js';
 import getLogSpy from '../../src/utils/getLogSpy.js';
 
-describe('로또 출력 클래스 테스트', () => {
+describe('로또 출력 테스트', () => {
   describe('로또 구매 출력 테스트', () => {
     test.each([
       {
@@ -25,7 +25,9 @@ describe('로또 출력 클래스 테스트', () => {
       '로또 구매 개수와 각 로또 번호를 오름차순으로 보여준다.',
       ({ input, expected }) => {
         const logSpy = getLogSpy();
+
         LottoOutput.printPurchasedLotto(input);
+
         expect(logSpy.mock.calls).toEqual(expected);
       }
     );
@@ -87,7 +89,9 @@ describe('로또 출력 클래스 테스트', () => {
       '당첨 내역과 소수점 둘째 자리에서 반올림한 수익률을 보여준다.',
       ({ input, expected }) => {
         const logSpy = getLogSpy();
+
         LottoOutput.printResult(input.statistics, input.yieldRate);
+
         expect(logSpy.mock.calls).toEqual(expected);
       }
     );

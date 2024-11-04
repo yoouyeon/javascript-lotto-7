@@ -26,6 +26,10 @@ describe('로또 구입 금액 유효성 검사 테스트', () => {
   });
 
   test('유효한 금액을 입력하면 CustomError를 반환하지 않는다.', () => {
-    expect(() => purchaseValidation.validate(1000)).not.toThrow(CustomError);
+    const VALID_INPUT = 1000;
+
+    expect(() => purchaseValidation.validate(VALID_INPUT)).not.toThrow(
+      CustomError
+    );
   });
 });

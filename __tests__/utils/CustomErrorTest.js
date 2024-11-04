@@ -5,6 +5,7 @@ describe('CustomError 테스트', () => {
     const throwCustomError = () => {
       throw new CustomError('error message');
     };
+
     expect(throwCustomError).toThrow(/^\[ERROR\]/);
   });
 
@@ -12,6 +13,7 @@ describe('CustomError 테스트', () => {
     const throwCustomError = () => {
       throw new CustomError('error message');
     };
+
     expect(throwCustomError).toThrow(Error);
   });
 });

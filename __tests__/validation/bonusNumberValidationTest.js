@@ -41,8 +41,11 @@ describe('보너스 번호 유효성 검사', () => {
   );
 
   test('유효한 보너스 번호를 입력하면 CustomError를 반환하지 않는다.', () => {
+    const VALID_BONUS_NUMBER = '7';
+    const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
+
     expect(() =>
-      bonusNumberValidation.validate('7', [1, 2, 3, 4, 5, 6])
+      bonusNumberValidation.validate(VALID_BONUS_NUMBER, WINNING_NUMBERS)
     ).not.toThrow(CustomError);
   });
 });
