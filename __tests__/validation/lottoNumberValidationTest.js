@@ -2,26 +2,28 @@ import CustomError from '../../src/utils/CustomError.js';
 import lottoNumberValidation from '../../src/validations/lottoNumberValidation.js';
 
 describe('로또 번호 유효성 검사 테스트', () => {
+  const { RULE_SET } = lottoNumberValidation;
+
   test.each([
     {
       input: [1, 2, 3, 4, 5],
-      expected: lottoNumberValidation.RULE_SET.notValidCount.errorMessage,
+      expected: RULE_SET.notValidCount.errorMessage,
     },
     {
       input: [1, 2, 3, 4, 5, 6, 7],
-      expected: lottoNumberValidation.RULE_SET.notValidCount.errorMessage,
+      expected: RULE_SET.notValidCount.errorMessage,
     },
     {
       input: [0, 2, 3, 4, 5, 6],
-      expected: lottoNumberValidation.RULE_SET.notInRange.errorMessage,
+      expected: RULE_SET.notInRange.errorMessage,
     },
     {
       input: [1, 2, 3, 4, 5, 46],
-      expected: lottoNumberValidation.RULE_SET.notInRange.errorMessage,
+      expected: RULE_SET.notInRange.errorMessage,
     },
     {
       input: [1, 2, 3, 4, 5, 5],
-      expected: lottoNumberValidation.RULE_SET.notUnique.errorMessage,
+      expected: RULE_SET.notUnique.errorMessage,
     },
   ])(
     '로또 번호 $input은 "$expected" CustomError를 반환한다.',

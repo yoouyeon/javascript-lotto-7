@@ -17,13 +17,15 @@ describe('로또 구매 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
     });
 
-    test('유효한 금액을 입력하면 로또를 생성하고 반환한다.', async () => {
+    test('유효한 금액을 입력하면 로또를 생성하고 구매 금액과 생성한 로또 배열을 반환한다.', async () => {
       mockQuestions([VALID_INPUT]);
+      const EXPECTED_COST = 1000;
+      const EXPECTED_LOTTO_COUNT = 1;
 
       const { lottos, purchaseCost } = await LottoPurchaseManager.purchase();
 
-      expect(purchaseCost).toBe(1000);
-      expect(lottos.length).toBe(1);
+      expect(purchaseCost).toBe(EXPECTED_COST);
+      expect(lottos.length).toBe(EXPECTED_LOTTO_COUNT);
       expect(lottos.every((lotto) => lotto instanceof Lotto)).toBe(true);
     });
   });

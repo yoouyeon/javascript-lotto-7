@@ -2,9 +2,9 @@ import CustomError from '../../src/utils/CustomError.js';
 import inputValidation from '../../src/validations/inputValidation.js';
 
 describe('입력 유효성 검사 테스트', () => {
-  test.each([
-    { input: '', expected: inputValidation.RULE_SET.isEmpty.errorMessage },
-  ])(
+  const { RULE_SET } = inputValidation;
+
+  test.each([{ input: '', expected: RULE_SET.isEmpty.errorMessage }])(
     '입력이 "$input"일 경우 "$expected" CustomError를 반환한다.',
     ({ input, expected }) => {
       expect(() => inputValidation.validate(input)).toThrow(
