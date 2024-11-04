@@ -1,4 +1,5 @@
 import checkRuleSet from '../utils/checkRuleSet.js';
+import SINGLE_LOTTO_PRICE from '../constants/SingleLottoPrice.js';
 
 const purchaseValidation = Object.freeze({
   RULE_SET: Object.freeze({
@@ -7,12 +8,12 @@ const purchaseValidation = Object.freeze({
       errorMessage: '숫자를 입력해주세요.',
     }),
     notEnough: Object.freeze({
-      isValid: (priceInput) => Number(priceInput) >= 1000,
-      errorMessage: '1000원 이상의 금액을 입력해주세요.',
+      isValid: (priceInput) => Number(priceInput) >= SINGLE_LOTTO_PRICE,
+      errorMessage: `${SINGLE_LOTTO_PRICE}원 이상의 금액을 입력해주세요.`,
     }),
-    notThousand: Object.freeze({
-      isValid: (priceInput) => Number(priceInput) % 1000 === 0,
-      errorMessage: '1000원 단위로 입력해주세요.',
+    notDivisible: Object.freeze({
+      isValid: (priceInput) => Number(priceInput) % SINGLE_LOTTO_PRICE === 0,
+      errorMessage: `${SINGLE_LOTTO_PRICE}원 단위로 입력해주세요.`,
     }),
   }),
 
