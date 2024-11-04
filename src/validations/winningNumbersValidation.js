@@ -1,6 +1,11 @@
+// @ts-check
+
 import checkRuleSet from '../utils/checkRuleSet.js';
 import LOTTO_NUMBER_RULE from '../constants/LottoNumberRule.js';
 
+/**
+ *  @type {import('../types.js').ValidationObjectType}
+ */
 const winningNumbersValidation = Object.freeze({
   RULE_SET: Object.freeze({
     notValidCount: Object.freeze({
@@ -33,6 +38,11 @@ const winningNumbersValidation = Object.freeze({
     }),
   }),
 
+  /**
+   * @param {Array<number>} winningNumbers
+   * @returns {void}
+   * @throws {CustomError}
+   */
   validate: (winningNumbers) => {
     checkRuleSet(winningNumbers, winningNumbersValidation.RULE_SET);
   },

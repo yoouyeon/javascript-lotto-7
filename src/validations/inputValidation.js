@@ -1,5 +1,10 @@
+// @ts-check
+
 import checkRuleSet from '../utils/checkRuleSet.js';
 
+/**
+ *  @type {import('../types.js').ValidationObjectType}
+ */
 const inputValidation = Object.freeze({
   RULE_SET: Object.freeze({
     isEmpty: Object.freeze({
@@ -8,6 +13,11 @@ const inputValidation = Object.freeze({
     }),
   }),
 
+  /**
+   * @param {string} input
+   * @returns {void}
+   * @throws {CustomError}
+   */
   validate(input) {
     checkRuleSet(input, this.RULE_SET);
   },
