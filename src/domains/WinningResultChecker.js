@@ -17,7 +17,7 @@ class WinningResultChecker {
    */
   constructor(winningNumbers, bonusNumber) {
     winningNumbersValidation.validate(winningNumbers);
-    bonusNumberValidation.validate({ bonusNumber, winningNumbers });
+    bonusNumberValidation.validate(bonusNumber, winningNumbers);
     this.#winningNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
   }

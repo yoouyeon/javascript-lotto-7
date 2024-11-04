@@ -25,13 +25,16 @@ class LottoMachine {
 
   async #purchase() {
     this.#totalPurchaseCost = await LottoInput.readTotalPurchaseCost();
-    this.#purchasedLottos = LottoPurchaseManager.buy(this.#totalPurchaseCost);
+    this.#purchasedLottos = LottoPurchaseManager.purchase(
+      this.#totalPurchaseCost
+    );
     LottoOutput.printPurchasedLotto(this.#purchasedLottos);
   }
 
   async #createWinningResultChecker() {
-    const winningNumbers = await LottoInput.readWinningNumbers();
-    const bonusNumber = await LottoInput.readBonusNumber();
+    const winningNumbers = await LottoMachine.#getWinningNumbers();
+    const bonusNumber = await LottoMachine.#getBonusNumber();
+
     this.#winningResultChecker = new WinningResultChecker(
       winningNumbers,
       bonusNumber
@@ -48,6 +51,18 @@ class LottoMachine {
       result
     );
     LottoOutput.printResult(winningStats, profitRate);
+  }
+
+  static async #getWinningNumbers() {
+    const winningNumbers = await LottoInput.readWinningNumbers();
+
+    return winningNumbers.split(',').map((number) => Number(number));
+  }
+
+  static async #getBonusNumber() {
+    const bonusNumber = await LottoInput.readBonusNumber();
+
+    return Number(bonusNumber);
   }
 }
 
