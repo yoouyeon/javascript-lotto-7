@@ -3,6 +3,7 @@ import LottoOutput from './ui/LottoOutput.js';
 import LottoPurchaseManager from './domains/LottoPurchaseManager.js';
 import WinningResultChecker from './domains/WinningResultChecker.js';
 import LottoStatistics from './domains/LottoStatistics.js';
+import retryAsyncWithLog from './utils/retryAsyncWithLog.js';
 
 class LottoMachine {
   #totalPurchaseCost;
@@ -24,17 +25,19 @@ class LottoMachine {
   }
 
   async #purchase() {
-    this.#totalPurchaseCost = await LottoInput.readTotalPurchaseCost();
-    this.#purchasedLottos = LottoPurchaseManager.purchase(
-      this.#totalPurchaseCost
-    );
+    const { lottos, purchaseCost } = await LottoPurchaseManager.purchase();
+    this.#totalPurchaseCost = purchaseCost;
+    this.#purchasedLottos = lottos;
     LottoOutput.printPurchasedLotto(this.#purchasedLottos);
   }
 
   async #createWinningResultChecker() {
-    const winningNumbers = await LottoMachine.#getWinningNumbers();
-    const bonusNumber = await LottoMachine.#getBonusNumber();
-
+    const winningNumbers = await retryAsyncWithLog(
+      LottoInput.readWinningNumbers.bind(LottoInput)
+    );
+    const bonusNumber = await retryAsyncWithLog(() =>
+      LottoInput.readBonusNumber.bind(LottoInput)(winningNumbers)
+    );
     this.#winningResultChecker = new WinningResultChecker(
       winningNumbers,
       bonusNumber
@@ -51,18 +54,6 @@ class LottoMachine {
       result
     );
     LottoOutput.printResult(winningStats, profitRate);
-  }
-
-  static async #getWinningNumbers() {
-    const winningNumbers = await LottoInput.readWinningNumbers();
-
-    return winningNumbers.split(',').map((number) => Number(number));
-  }
-
-  static async #getBonusNumber() {
-    const bonusNumber = await LottoInput.readBonusNumber();
-
-    return Number(bonusNumber);
   }
 }
 

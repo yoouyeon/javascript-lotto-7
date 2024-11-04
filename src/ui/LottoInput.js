@@ -1,3 +1,6 @@
+import bonusNumberValidation from '../validations/bonusNumberValidation.js';
+import purchaseValidation from '../validations/purchaseValidation.js';
+import winningNumbersValidation from '../validations/winningNumbersValidation.js';
 import Input from './Input.js';
 
 class LottoInput extends Input {
@@ -8,15 +11,26 @@ class LottoInput extends Input {
   static #BONUS_NUMBER_MESSAGE = '보너스 번호를 입력해 주세요.\n';
 
   static async readTotalPurchaseCost() {
-    return super.readLine(this.#PURCHASE_MESSAGE);
+    const purchaseCost = Number(await super.readLine(this.#PURCHASE_MESSAGE));
+    purchaseValidation.validate(purchaseCost);
+    return purchaseCost;
   }
 
   static async readWinningNumbers() {
-    return super.readLine(this.#WINNING_NUMBERS_MESSAGE);
+    const winningNumbers = (await super.readLine(this.#WINNING_NUMBERS_MESSAGE))
+      .split(',')
+      .map((number) => Number(number));
+    winningNumbersValidation.validate(winningNumbers);
+    return winningNumbers;
   }
 
-  static async readBonusNumber() {
-    return super.readLine(this.#BONUS_NUMBER_MESSAGE);
+  static async readBonusNumber(winningNumbers) {
+    const bonusNumber = Number(
+      await super.readLine(this.#BONUS_NUMBER_MESSAGE)
+    );
+    bonusNumberValidation.validate(bonusNumber, winningNumbers);
+
+    return bonusNumber;
   }
 }
 

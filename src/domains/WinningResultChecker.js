@@ -1,7 +1,5 @@
 // @ts-check
 import LOTTERY_PRIZE_TABLE from '../constants/LotteryPrizeTable.js';
-import bonusNumberValidation from '../validations/bonusNumberValidation.js';
-import winningNumbersValidation from '../validations/winningNumbersValidation.js';
 
 /** @typedef {import('./Lotto.js').default} Lotto */
 
@@ -16,8 +14,6 @@ class WinningResultChecker {
    * @param {number} bonusNumber - 보너스 번호
    */
   constructor(winningNumbers, bonusNumber) {
-    winningNumbersValidation.validate(winningNumbers);
-    bonusNumberValidation.validate(bonusNumber, winningNumbers);
     this.#winningNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
   }
