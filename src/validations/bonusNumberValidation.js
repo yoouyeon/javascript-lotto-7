@@ -5,22 +5,22 @@ const bonusNumberValidation = Object.freeze({
   RULE_SET: Object.freeze({
     notNumber: Object.freeze({
       isValid: ({ bonusNumber }) => !Number.isNaN(Number(bonusNumber)),
-      errorMessage: '숫자를 입력해주세요.',
+      errorMessage: '보너스 번호는 숫자여야 합니다.',
     }),
     notInteger: Object.freeze({
       isValid: ({ bonusNumber }) => Number.isInteger(Number(bonusNumber)),
-      errorMessage: '정수를 입력해주세요.',
+      errorMessage: '보너스 번호는 정수여야 합니다.',
     }),
     notInRange: Object.freeze({
       isValid: ({ bonusNumber }) =>
         Number(bonusNumber) >= LOTTO_NUMBER_RULE.MIN &&
         Number(bonusNumber) <= LOTTO_NUMBER_RULE.MAX,
-      errorMessage: `${LOTTO_NUMBER_RULE.MIN}부터 ${LOTTO_NUMBER_RULE.MAX} 사이의 숫자를 입력해주세요.`,
+      errorMessage: `보너스 번호는 ${LOTTO_NUMBER_RULE.MIN}부터 ${LOTTO_NUMBER_RULE.MAX} 사이의 숫자여야 합니다.`,
     }),
     notUnique: Object.freeze({
       isValid: ({ bonusNumber, winningNumbers }) =>
         !winningNumbers.includes(Number(bonusNumber)),
-      errorMessage: '당첨 번호와 중복되지 않는 숫자를 입력해주세요.',
+      errorMessage: '보너스 번호는 당첨 번호와 중복되지 않아야 합니다.',
     }),
   }),
 

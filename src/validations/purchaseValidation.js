@@ -5,7 +5,7 @@ const purchaseValidation = Object.freeze({
   RULE_SET: Object.freeze({
     notNumber: Object.freeze({
       isValid: (priceInput) => !Number.isNaN(Number(priceInput)),
-      errorMessage: '숫자를 입력해주세요.',
+      errorMessage: '구매 금액은 숫자로 입력해주세요.',
     }),
     notEnough: Object.freeze({
       isValid: (priceInput) => Number(priceInput) >= SINGLE_LOTTO_PRICE,
