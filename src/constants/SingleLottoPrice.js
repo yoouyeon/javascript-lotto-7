@@ -1,0 +1,3 @@
+const SINGLE_LOTTO_PRICE = 1000;
+
+export default SINGLE_LOTTO_PRICE;
