@@ -1,7 +1,7 @@
 // @ts-check
 
 /**
- * @type (import('../types.js').LottoPrizeTableType)
+ * @type {import('../types.js').LottoPrizeTableType}
  */
 const LOTTERY_PRIZE_TABLE = Object.freeze({
   '1st': Object.freeze({

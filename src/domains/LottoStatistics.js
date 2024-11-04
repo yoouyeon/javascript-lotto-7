@@ -18,6 +18,7 @@ const LottoStatistics = Object.freeze({
   /**
    * @param {Array<import ('../types.js').LottoResultType>} lottoResults - 로또 결과 배열
    * @returns {Array<import ('../types.js').LottoStatisticsType>}
+   * @description 로또 결과 배열을 받아서 각 순위별 당첨 개수를 반환한다.
    */
   getWinningStats: (lottoResults) => {
     const winningStats = Object.entries(LOTTERY_PRIZE_TABLE).map(
@@ -34,6 +35,7 @@ const LottoStatistics = Object.freeze({
    * @param {number} lottoPrice - 로또 구매 금액
    * @param {Array<import ('../types.js').LottoResultType>} lottoResults - 로또 결과 배열
    * @returns {number} - 수익률
+   * @description 로또 구매 금액과 로또 결과 배열을 받아서 수익률을 계산하여 반환한다.
    */
   getProfitRate: (lottoPrice, lottoResults) => {
     const totalPrize = LottoStatistics.getTotalPrize(lottoResults);
@@ -46,6 +48,7 @@ const LottoStatistics = Object.freeze({
   /**
    * @param {Array<import ('../types.js').LottoResultType>} lottoResults - 로또 결과 배열
    * @returns {number} - 총 상금
+   * @description 로또 결과 배열을 받아서 총 상금을 반환한다.
    */
   getTotalPrize: (lottoResults) =>
     lottoResults.reduce((acc, result) => {

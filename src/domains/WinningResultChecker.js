@@ -22,6 +22,7 @@ class WinningResultChecker {
    * @public
    * @param {Array<Lotto>} lottos
    * @returns {Array<(import('../types.js').LottoResultType)>} - 로또 결과 배열
+   * @description 로또 목록을 받아서 각 로또의 결과를 반환한다.
    */
   getTotalResult(lottos) {
     return lottos.map((lotto) => this.getResult(lotto));
@@ -31,6 +32,7 @@ class WinningResultChecker {
    * @public
    * @param {Lotto} lotto
    * @returns {import('../types.js').LottoResultType} - 로또 결과 (당첨 또는 미당첨)
+   * @description 각 로또의 결과를 반환한다.
    */
   getResult = (lotto) => {
     const matchCount = this.#getMatchCount(lotto);
@@ -56,6 +58,7 @@ class WinningResultChecker {
    * @param {number} matchCount - 당첨 번호와 일치하는 숫자의 개수
    * @param {boolean} isBonusMatch - 보너스 번호와 일치하는지 여부
    * @returns {import('../types.js').LottoResultType} - 로또 결과 (당첨 또는 미당첨)
+   * @description 당첨 번호와 일치하는 숫자의 개수와 보너스 번호와 일치하는지 여부를 받아서 해당하는 로또 결과를 반환한다.
    */
   static #getRank = (matchCount, isBonusMatch) => {
     const lottoRank = /** @type {import('../types.js').LottoResultType} */ (
