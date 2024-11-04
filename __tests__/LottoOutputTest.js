@@ -1,3 +1,4 @@
+import Lotto from '../src/domains/Lotto.js';
 import LottoOutput from '../src/ui/LottoOutput.js';
 import getLogSpy from '../src/utils/test/getLogSpy.js';
 
@@ -5,22 +6,19 @@ describe('로또 출력 클래스 테스트', () => {
   describe('로또 구매 출력 테스트', () => {
     test.each([
       {
-        input: [[1, 2, 3, 4, 5]],
-        expected: [['로또 1개를 구매했습니다.'], ['[1, 2, 3, 4, 5]']],
+        input: [new Lotto([1, 2, 3, 4, 5, 6])],
+        expected: [['로또 1개를 구매했습니다.'], ['[1, 2, 3, 4, 5, 6]']],
       },
       {
-        input: [[5, 4, 3, 2, 1]],
-        expected: [['로또 1개를 구매했습니다.'], ['[1, 2, 3, 4, 5]']],
+        input: [new Lotto([6, 5, 4, 3, 2, 1])],
+        expected: [['로또 1개를 구매했습니다.'], ['[1, 2, 3, 4, 5, 6]']],
       },
       {
-        input: [
-          [1, 2, 3, 4, 5],
-          [1, 2, 3, 4, 5],
-        ],
+        input: [new Lotto([1, 2, 3, 4, 5, 6]), new Lotto([1, 2, 3, 4, 5, 6])],
         expected: [
           ['로또 2개를 구매했습니다.'],
-          ['[1, 2, 3, 4, 5]'],
-          ['[1, 2, 3, 4, 5]'],
+          ['[1, 2, 3, 4, 5, 6]'],
+          ['[1, 2, 3, 4, 5, 6]'],
         ],
       },
     ])(

@@ -8,7 +8,7 @@ describe('로또 구매 테스트', () => {
   ])(
     '$input원으로 $expected개의 로또를 구매할 수 있다.',
     ({ input, expected }) => {
-      const lottos = LottoPurchaseManager.buy(input);
+      const lottos = LottoPurchaseManager.purchase(input);
       expect(lottos.length).toBe(expected);
       expect(lottos.every((lotto) => lotto instanceof Lotto)).toBe(true);
     }

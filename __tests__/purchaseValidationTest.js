@@ -13,11 +13,11 @@ describe('로또 구입 금액 유효성 검사 테스트', () => {
     },
     {
       input: 1500,
-      expected: purchaseValidation.RULE_SET.notThousand.errorMessage,
+      expected: purchaseValidation.RULE_SET.notDivisible.errorMessage,
     },
     {
       input: 1000.5,
-      expected: purchaseValidation.RULE_SET.notThousand.errorMessage,
+      expected: purchaseValidation.RULE_SET.notDivisible.errorMessage,
     },
   ])('$input은 "$expected" CustomError를 반환한다.', ({ input, expected }) => {
     expect(() => purchaseValidation.validate(input)).toThrow(
