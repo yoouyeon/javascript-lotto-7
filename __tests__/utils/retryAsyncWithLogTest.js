@@ -1,6 +1,6 @@
-import retryAsyncWithLog from '../src/utils/retryAsyncWithLog';
-import CustomError from '../src/validations/CustomError';
-import getLogSpy from '../src/utils/test/getLogSpy';
+import retryAsyncWithLog from '../../src/utils/retryAsyncWithLog.js';
+import CustomError from '../../src/utils/CustomError.js';
+import getLogSpy from '../../src/utils/getLogSpy.js';
 
 describe('retryAsyncWithLog 테스트', () => {
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import CustomError from '../src/validations/CustomError.js';
+import CustomError from '../../src/utils/CustomError.js';
 
 describe('CustomError 테스트', () => {
   test("에러 메시지는 '[ERROR]'로 시작해야 한다.", () => {

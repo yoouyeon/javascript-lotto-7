@@ -1,5 +1,5 @@
-import CustomError from '../src/validations/CustomError.js';
-import inputValidation from '../src/validations/inputValidation';
+import CustomError from '../../src/utils/CustomError.js';
+import inputValidation from '../../src/validations/inputValidation.js';
 
 describe('입력 유효성 검사 테스트', () => {
   test.each([

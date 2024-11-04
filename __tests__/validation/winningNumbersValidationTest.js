@@ -1,5 +1,5 @@
-import CustomError from '../src/validations/CustomError.js';
-import winningNumbersValidation from '../src/validations/winningNumbersValidation.js';
+import CustomError from '../../src/utils/CustomError.js';
+import winningNumbersValidation from '../../src/validations/winningNumbersValidation.js';
 
 describe('당첨 번호 유효성 검사', () => {
   test.each([

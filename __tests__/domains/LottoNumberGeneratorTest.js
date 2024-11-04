@@ -1,4 +1,4 @@
-import LottoNumberGenerator from '../src/domains/LottoNumberGenerator.js';
+import LottoNumberGenerator from '../../src/domains/LottoNumberGenerator.js';
 
 describe('로또 생성 테스트', () => {
   test('생성된 로또는 1~45까지의 중복되지 않은 숫자 6개가 오름차순으로 정렬된 배열이어야 한다.', () => {

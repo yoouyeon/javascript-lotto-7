@@ -1,5 +1,5 @@
-import CustomError from '../src/validations/CustomError.js';
-import bonusNumberValidation from '../src/validations/bonusNumberValidation.js';
+import CustomError from '../../src/utils/CustomError.js';
+import bonusNumberValidation from '../../src/validations/bonusNumberValidation.js';
 
 describe('보너스 번호 유효성 검사', () => {
   test.each([

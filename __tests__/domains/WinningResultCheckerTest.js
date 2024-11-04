@@ -1,5 +1,5 @@
-import WinningResultChecker from '../src/domains/WinningResultChecker.js';
-import Lotto from '../src/domains/Lotto.js';
+import WinningResultChecker from '../../src/domains/WinningResultChecker.js';
+import Lotto from '../../src/domains/Lotto.js';
 
 describe('로또 결과 테스트', () => {
   const makeFakeLotto = (numbers) => new Lotto(numbers);

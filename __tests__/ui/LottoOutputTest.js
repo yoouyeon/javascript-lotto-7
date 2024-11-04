@@ -1,6 +1,6 @@
-import Lotto from '../src/domains/Lotto.js';
-import LottoOutput from '../src/ui/LottoOutput.js';
-import getLogSpy from '../src/utils/test/getLogSpy.js';
+import Lotto from '../../src/domains/Lotto.js';
+import LottoOutput from '../../src/ui/LottoOutput.js';
+import getLogSpy from '../../src/utils/getLogSpy.js';
 
 describe('로또 출력 클래스 테스트', () => {
   describe('로또 구매 출력 테스트', () => {

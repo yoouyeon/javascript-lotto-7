@@ -1,5 +1,5 @@
-import CustomError from '../src/validations/CustomError.js';
-import lottoNumberValidation from '../src/validations/lottoNumberValidation.js';
+import CustomError from '../../src/utils/CustomError.js';
+import lottoNumberValidation from '../../src/validations/lottoNumberValidation.js';
 
 describe('로또 번호 유효성 검사 테스트', () => {
   test.each([

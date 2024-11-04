@@ -1,5 +1,5 @@
-import LottoStatistics from '../src/domains/LottoStatistics.js';
-import LOTTERY_PRIZE_TABLE from '../src/constants/LotteryPrizeTable.js';
+import LottoStatistics from '../../src/domains/LottoStatistics.js';
+import LOTTERY_PRIZE_TABLE from '../../src/constants/LotteryPrizeTable.js';
 
 describe('로또 통계 계산 테스트', () => {
   const {

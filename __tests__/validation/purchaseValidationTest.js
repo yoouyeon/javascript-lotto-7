@@ -1,5 +1,5 @@
-import purchaseValidation from '../src/validations/purchaseValidation.js';
-import CustomError from '../src/validations/CustomError.js';
+import purchaseValidation from '../../src/validations/purchaseValidation.js';
+import CustomError from '../../src/utils/CustomError.js';
 
 describe('로또 구입 금액 유효성 검사 테스트', () => {
   test.each([
