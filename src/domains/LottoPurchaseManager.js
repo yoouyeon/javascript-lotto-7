@@ -6,8 +6,8 @@ import retryAsyncWithLog from '../utils/retryAsyncWithLog.js';
 
 const LottoPurchaseManager = Object.freeze({
   async purchase() {
-    const purchaseCost = await retryAsyncWithLog(
-      LottoInput.readTotalPurchaseCost.bind(LottoInput)
+    const purchaseCost = Number(
+      await retryAsyncWithLog(LottoInput.readTotalPurchaseCost.bind(LottoInput))
     );
     const lottos = this.createLottos(purchaseCost);
     return { lottos, purchaseCost };
