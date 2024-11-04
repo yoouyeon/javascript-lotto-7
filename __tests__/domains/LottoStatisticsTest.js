@@ -105,6 +105,7 @@ describe('로또 통계 계산 테스트', () => {
     '로또 결과가 $input 일 때 당첨 통계가 올바르게 계산된다.',
     ({ input, expected }) => {
       const result = LottoStatistics.getWinningStats(input);
+
       expect(result).toEqual(expected);
     }
   );
@@ -118,6 +119,7 @@ describe('로또 통계 계산 테스트', () => {
     '로또 결과가 $input 일 때 총 상금은 $expected 이다.',
     ({ input, expected }) => {
       const result = LottoStatistics.getTotalPrize(input);
+
       expect(result).toBe(expected);
     }
   );
@@ -131,6 +133,7 @@ describe('로또 통계 계산 테스트', () => {
     '로또 구매 금액이 $lottoPrice이고 로또 결과가 $lottoResult 일 때 수익률은 $expected 이다.',
     ({ lottoPrice, lottoResult, expected }) => {
       const result = LottoStatistics.getProfitRate(lottoPrice, lottoResult);
+
       expect(result).toBe(expected);
     }
   );
