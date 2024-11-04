@@ -23,8 +23,8 @@ const LottoPurchaseManager = Object.freeze({
    * @description 구매 금액을 입력받아 로또를 생성하고, 생성한 로또 목록과 총 가격을 반환한다.
    */
   async purchase() {
-    const purchaseCost = Number(
-      await retryAsyncWithLog(LottoInput.readTotalPurchaseCost.bind(LottoInput))
+    const purchaseCost = await retryAsyncWithLog(
+      LottoInput.readTotalPurchaseCost.bind(LottoInput)
     );
     const lottos = this.createLottos(purchaseCost);
     return { lottos, purchaseCost };
