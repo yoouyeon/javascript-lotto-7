@@ -1,4 +1,5 @@
-import Lotto from '../src/Lotto';
+import Lotto from '../src/Lotto.js';
+import LottoMachine from '../src/LottoMachine.js';
 
 describe('로또 클래스 테스트', () => {
   test('로또 번호의 개수가 6개 이하이면 예외가 발생한다.', () => {
@@ -51,5 +52,25 @@ describe('로또 클래스 테스트', () => {
       // eslint-disable-next-line no-new
       new Lotto([1, 2, 3, 4, 5, 6]);
     }).not.toThrow();
+  });
+
+  test.each([
+    { lottoNumbers: [1, 2, 3, 4, 5, 6], expectedRank: 1 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 7], expectedRank: 2 },
+    { lottoNumbers: [1, 2, 3, 4, 5, 8], expectedRank: 3 },
+    { lottoNumbers: [1, 2, 3, 4, 8, 9], expectedRank: 4 },
+    { lottoNumbers: [1, 2, 3, 8, 9, 10], expectedRank: 5 },
+    { lottoNumbers: [1, 7, 8, 9, 10, 11], expectedRank: 0 },
+  ])('로또의 등수를 반환한다. ($expectedRank등)', ({ lottoNumbers, expectedRank }) => {
+    // given
+    const lotto = new Lotto(lottoNumbers);
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    const bonusNumber = 7;
+
+    // when
+    const rank = lotto.getRank(winningNumbers, bonusNumber, LottoMachine.winningTable);
+
+    // then
+    expect(rank).toBe(expectedRank);
   });
 });

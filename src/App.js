@@ -24,6 +24,7 @@ class App {
     this.#printPurchasedLottoes();
     this.#winningNumbers = await retryInput(App.readWinningNumbers);
     this.#bonusNumber = await retryInput(() => App.readBonusNumber(this.#winningNumbers));
+    this.#printWinningResult();
   }
 
   /**
@@ -94,6 +95,16 @@ class App {
 
   #printPurchasedLottoes() {
     OutputView.printPurchasedLottoes(this.#purchasedLottoes);
+    OutputView.printNewLine();
+  }
+
+  #printWinningResult() {
+    const winningResult = LottoMachine.getWinningResult(
+      this.#purchasedLottoes,
+      this.#winningNumbers,
+      this.#bonusNumber
+    );
+    OutputView.printWinningResult(winningResult);
   }
 }
 

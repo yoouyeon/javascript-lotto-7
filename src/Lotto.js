@@ -35,6 +35,23 @@ class Lotto {
       if (Number.isNaN(num)) throw new CustomError(NumberChecker.NAN_ERROR);
     });
   }
+
+  /**
+   * @param {number[]} winningNumbers - 당첨 번호
+   * @param {number} bonusNumber - 보너스 번호
+   * @param {import('./type.js').winningTableType[]} winningTable - 당첨 테이블
+   * @returns {number} - 로또의 등수 (0은 미당첨)
+   */
+  getRank(winningNumbers, bonusNumber, winningTable) {
+    const matchCount = this.#numbers.filter((num) => winningNumbers.includes(num)).length;
+    const isBonusMatch = this.#numbers.includes(bonusNumber);
+    const winningRank = winningTable.find((rank) => {
+      if (rank.matchCount === matchCount && rank.bonusMatch && isBonusMatch) return true;
+      if (rank.matchCount === matchCount && !rank.bonusMatch && !isBonusMatch) return true;
+      return false;
+    });
+    return winningRank?.rank || 0;
+  }
 }
 
 export default Lotto;
