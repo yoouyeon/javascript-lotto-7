@@ -30,9 +30,9 @@ const OutputView = {
    */
   winningResultFormat: (rank, winningCount) => {
     if (rank.bonusMatch) {
-      return `${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.prize.toLocaleString()}원)- ${winningCount}개`;
+      return `${rank.matchCount}개 일치, 보너스 볼 일치 (${rank.prize.toLocaleString()}원) - ${winningCount}개`;
     }
-    return `${rank.matchCount}개 일치 (${rank.prize.toLocaleString()}원)- ${winningCount}개`;
+    return `${rank.matchCount}개 일치 (${rank.prize.toLocaleString()}원) - ${winningCount}개`;
   },
 
   /**
