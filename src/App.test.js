@@ -88,4 +88,18 @@ describe('로또 발매기 테스트', () => {
       expect(bonusNumber).toBe(validInputNumber);
     });
   });
+
+  test.each([
+    { winningResult: [0, 0, 0, 0, 0], purchaseAmount: 5000, expected: 0 },
+    { winningResult: [1, 0, 0, 0, 0], purchaseAmount: 8000, expected: 62.5 },
+    { winningResult: [0, 1, 0, 0, 0], purchaseAmount: 6000, expected: 833.3 },
+    { winningResult: [1, 1, 0, 0, 0], purchaseAmount: 10000, expected: 550 },
+    { winningResult: [0, 0, 0, 1, 0], purchaseAmount: 9000, expected: 333333.3 },
+  ])('수익률을 계산한다.', ({ winningResult, purchaseAmount, expected }) => {
+    // when
+    const profitRate = App.calculateProfitRate(winningResult, purchaseAmount);
+
+    // then
+    expect(profitRate).toBe(expected);
+  });
 });

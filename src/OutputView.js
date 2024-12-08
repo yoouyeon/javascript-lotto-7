@@ -35,6 +35,14 @@ const OutputView = {
     return `${rank.matchCount}개 일치 (${rank.prize.toLocaleString()}원)- ${winningCount}개`;
   },
 
+  /**
+   * @param {number} profitRate - 총 수익률
+   */
+  printProfitRate: (profitRate) => {
+    // 소수점 첫째자리까지 출력
+    Console.print(`총 수익률은 ${profitRate.toFixed(1)}%입니다.`);
+  },
+
   printNewLine: () => Console.print(''),
 };
 

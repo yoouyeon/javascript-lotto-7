@@ -24,7 +24,7 @@ class App {
     this.#printPurchasedLottoes();
     this.#winningNumbers = await retryInput(App.readWinningNumbers);
     this.#bonusNumber = await retryInput(() => App.readBonusNumber(this.#winningNumbers));
-    this.#printWinningResult();
+    this.#printWinningResult(purchaseAmount);
   }
 
   /**
@@ -98,13 +98,31 @@ class App {
     OutputView.printNewLine();
   }
 
-  #printWinningResult() {
+  /**
+   * @param {number} purchaseAmount - 구입 금액
+   */
+  #printWinningResult(purchaseAmount) {
     const winningResult = LottoMachine.getWinningResult(
       this.#purchasedLottoes,
       this.#winningNumbers,
       this.#bonusNumber
     );
     OutputView.printWinningResult(winningResult);
+    const profitRate = App.calculateProfitRate(winningResult, purchaseAmount);
+    OutputView.printProfitRate(profitRate);
+  }
+
+  /**
+   * @param {number[]} winningResult - 당첨 결과
+   * @param {number} purchaseAmount - 구입 금액
+   * @returns {number} - 총 수익률 (%, 소수점 둘째자리에서 반올림)
+   */
+  static calculateProfitRate(winningResult, purchaseAmount) {
+    const totalPrize = winningResult.reduce(
+      (acc, count, index) => acc + count * LottoMachine.winningTable[index].prize,
+      0
+    );
+    return Number(((totalPrize / purchaseAmount) * 100).toFixed(1));
   }
 }
 
