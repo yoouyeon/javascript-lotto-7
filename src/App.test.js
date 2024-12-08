@@ -58,4 +58,34 @@ describe('로또 발매기 테스트', () => {
       expect(lottoNumbers).toEqual(validInputNumbers);
     });
   });
+
+  describe('보너스 번호 입력 테스트', () => {
+    const WINNING_NUMBERS = [1, 2, 3, 4, 5, 6];
+
+    test.each([
+      { input: '0', case: '0 이하의 값인 경우' },
+      { input: '46', case: '45 이상의 값인 경우' },
+      { input: '1a', case: '숫자가 아닌 경우' },
+      { input: '6', case: '당첨 번호와 중복인 경우' },
+    ])('유효하지 않은 보너스 번호를 입력하는 경우 에러를 던진다.($case)', async ({ input }) => {
+      // given
+      mockQuestions([input]);
+
+      // when, then
+      expect(App.readBonusNumber(WINNING_NUMBERS)).rejects.toThrow('[ERROR]');
+    });
+
+    test('유효한 보너스 번호를 입력하는 경우 보너스 번호를 반환한다.', async () => {
+      // given
+      const validInput = '7';
+      const validInputNumber = 7;
+      mockQuestions([validInput]);
+
+      // when
+      const bonusNumber = await App.readBonusNumber(WINNING_NUMBERS);
+
+      // then
+      expect(bonusNumber).toBe(validInputNumber);
+    });
+  });
 });

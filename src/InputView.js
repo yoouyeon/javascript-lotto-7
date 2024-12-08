@@ -22,6 +22,14 @@ const InputView = {
     const input = await Console.readLineAsync(this.WINNING_NUMBER_MESSAGE);
     return input.split(',').map((number) => Number(number));
   },
+
+  /**
+   * @return {Promise<number>} - 보너스 번호
+   */
+  async readBonusNumber() {
+    const input = await Console.readLineAsync(this.BONUS_NUMBER_MESSAGE);
+    return Number(input);
+  },
 };
 
 export default InputView;

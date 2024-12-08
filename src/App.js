@@ -4,12 +4,20 @@ import retryInput from './retryInput.js';
 import NumberChecker from './NumberChecker.js';
 
 class App {
+  #purchasedLottoes = [];
+
+  #winningNumbers = [];
+
+  #bonusNumber = 0;
+
   // eslint-disable-next-line class-methods-use-this
   async run() {
     // eslint-disable-next-line no-unused-vars
     const purchaseAmount = await retryInput(App.readPurchaseAmount);
     // eslint-disable-next-line no-unused-vars
-    const winningNumbers = await retryInput(App.readWinningNumbers);
+    this.#winningNumbers = await retryInput(App.readWinningNumbers);
+    // eslint-disable-next-line no-unused-vars
+    this.#bonusNumber = await retryInput(() => App.readBonusNumber(this.#winningNumbers));
   }
 
   /**
@@ -51,6 +59,28 @@ class App {
       if (NumberChecker.isNotInteger(number)) throw new CustomError(NumberChecker.INTEGER_ERROR);
       if (NumberChecker.isNotANumber(number)) throw new CustomError(NumberChecker.NAN_ERROR);
     });
+  }
+
+  /**
+   * @param {number[]} winningNumbers - 당첨 번호
+   * @return {Promise<number>} - 보너스 번호
+   */
+  static async readBonusNumber(winningNumbers) {
+    const bonusNumber = await InputView.readBonusNumber();
+    App.#validateBonusNumber(bonusNumber, winningNumbers);
+    return bonusNumber;
+  }
+
+  /**
+   * @param {number} bonusNumber - 입력된 보너스 번호
+   * @param {number[]} winningNumbers - 당첨 번호
+   */
+  static #validateBonusNumber(bonusNumber, winningNumbers) {
+    if (NumberChecker.isOutOfRange(bonusNumber)) throw new CustomError(NumberChecker.RANGE_ERROR);
+    if (NumberChecker.isNotInteger(bonusNumber)) throw new CustomError(NumberChecker.INTEGER_ERROR);
+    if (NumberChecker.isNotANumber(bonusNumber)) throw new CustomError(NumberChecker.NAN_ERROR);
+    if (winningNumbers.includes(bonusNumber))
+      throw new CustomError('보너스 번호는 당첨 번호와 중복될 수 없습니다.');
   }
 }
 
