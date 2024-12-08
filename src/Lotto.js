@@ -4,6 +4,8 @@ import CustomError from './CustomError.js';
 import NumberChecker from './NumberChecker.js';
 
 class Lotto {
+  static PRICE = 1000;
+
   #numbers;
 
   /**

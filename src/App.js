@@ -1,22 +1,26 @@
+// @ts-check
 import CustomError from './CustomError.js';
 import InputView from './InputView.js';
 import retryInput from './retryInput.js';
 import NumberChecker from './NumberChecker.js';
+import LottoMachine from './LottoMachine.js';
+
+/** @typedef {import('./Lotto.js').default} LottoType */
 
 class App {
+  /** @type {LottoType[]} */
   #purchasedLottoes = [];
 
+  /** @type {number[]} */
   #winningNumbers = [];
 
+  /** @type {number} */
   #bonusNumber = 0;
 
-  // eslint-disable-next-line class-methods-use-this
   async run() {
-    // eslint-disable-next-line no-unused-vars
     const purchaseAmount = await retryInput(App.readPurchaseAmount);
-    // eslint-disable-next-line no-unused-vars
+    this.#purchasedLottoes = LottoMachine.purchaseLottoes(purchaseAmount);
     this.#winningNumbers = await retryInput(App.readWinningNumbers);
-    // eslint-disable-next-line no-unused-vars
     this.#bonusNumber = await retryInput(() => App.readBonusNumber(this.#winningNumbers));
   }
 
