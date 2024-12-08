@@ -17,6 +17,13 @@ class Lotto {
   }
 
   /**
+   * @return {string} - 로또 번호를 문자열로 반환
+   */
+  get numbers() {
+    return `[${this.#numbers.join(', ')}]`;
+  }
+
+  /**
    * @param {(number)[]} numbers
    */
   static #validate(numbers) {

@@ -1,6 +1,7 @@
 // @ts-check
 import CustomError from './CustomError.js';
 import InputView from './InputView.js';
+import OutputView from './OutputView.js';
 import retryInput from './retryInput.js';
 import NumberChecker from './NumberChecker.js';
 import LottoMachine from './LottoMachine.js';
@@ -20,6 +21,7 @@ class App {
   async run() {
     const purchaseAmount = await retryInput(App.readPurchaseAmount);
     this.#purchasedLottoes = LottoMachine.purchaseLottoes(purchaseAmount);
+    this.#printPurchasedLottoes();
     this.#winningNumbers = await retryInput(App.readWinningNumbers);
     this.#bonusNumber = await retryInput(() => App.readBonusNumber(this.#winningNumbers));
   }
@@ -30,6 +32,7 @@ class App {
   static async readPurchaseAmount() {
     const purchaseAmount = await InputView.readPurchaseAmount();
     App.#validatePurchaseAmount(purchaseAmount);
+    OutputView.printNewLine();
     return purchaseAmount;
   }
 
@@ -48,6 +51,7 @@ class App {
   static async readWinningNumbers() {
     const winningNumbers = await InputView.readWinningNumbers();
     App.#validateWinningNumbers(winningNumbers);
+    OutputView.printNewLine();
     return winningNumbers;
   }
 
@@ -72,6 +76,7 @@ class App {
   static async readBonusNumber(winningNumbers) {
     const bonusNumber = await InputView.readBonusNumber();
     App.#validateBonusNumber(bonusNumber, winningNumbers);
+    OutputView.printNewLine();
     return bonusNumber;
   }
 
@@ -85,6 +90,10 @@ class App {
     if (NumberChecker.isNotANumber(bonusNumber)) throw new CustomError(NumberChecker.NAN_ERROR);
     if (winningNumbers.includes(bonusNumber))
       throw new CustomError('보너스 번호는 당첨 번호와 중복될 수 없습니다.');
+  }
+
+  #printPurchasedLottoes() {
+    OutputView.printPurchasedLottoes(this.#purchasedLottoes);
   }
 }
 
